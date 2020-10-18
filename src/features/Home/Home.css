@@ -1,0 +1,44 @@
+.cardImage{
+    height:600px;
+}
+.cardImage2{
+    height:200px;
+}
+
+.title{
+    font-size:50px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.font2{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:24px;
+}
+
+.font3{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:20px;
+    list-style: none;
+}
+.font4{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:24px;
+    font-variant: unset;
+}
+.font5{
+    font-family: 'Sacramento', cursive;
+    font-size:24px;
+    text-align: center;
+}
+.about{
+    color: rgb(94, 93, 93);
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    border:none;
+}
+.text-alignment{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  

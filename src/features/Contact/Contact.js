@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Map from './Map'
-import { db } from '../../components/App';
+import firebase from '../../components/firebase';
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -8,9 +8,11 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   
+  const db = firebase.firestore().collection('contacts');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    db.collection('contacts').add({
+    db.add({
       name:name,
       email:email,
       subject:subject,

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import PostComment from './PostComment';
+// import PostComment from './PostComment';
 
 export default function Iasi() {
     return (
@@ -108,7 +108,7 @@ export default function Iasi() {
             </div> 
 
             <hr></hr>
-            <PostComment />
+            {/* <PostComment /> */}
         </div>
     );
 }

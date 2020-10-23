@@ -41,4 +41,9 @@
     align-items: center;
     justify-content: center;
 }
-  
+
+
+.buttons{
+ margin-right: 20px;
+ border-radius: 8px;
+}

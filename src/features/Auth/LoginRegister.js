@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import * as firebase from "firebase/app";
-import "firebase/auth";
-
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default function LoginRegister() {
     const [values, setValues] = useState({
@@ -16,38 +15,38 @@ export default function LoginRegister() {
         retype_password: '',
     });
 
-    const [alert, setAlert] = useState(null)
+    const [alert, setAlert] = useState(null);
     const { pathname } = useLocation();
-    const isRegister = (pathname === '/register');
+    const isRegister = pathname === '/register';
 
     function handleInputChange(e) {
-        setErrors({...errors, [e.target.name]: '' });
+        setErrors({ ...errors, [e.target.name]: '' });
 
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
     function isFormValid() {
         let isValid = true;
-        const newErrors = {...errors};
+        const newErrors = { ...errors };
 
-        if(!values.email) {
+        if (!values.email) {
             // Set an error message
             newErrors.email = 'Please provide an email.';
             isValid = false;
         }
 
-        if(!values.password) {
+        if (!values.password) {
             // Set an error message
             newErrors.password = 'Please provide a password.';
             isValid = false;
         }
 
-        if(isRegister && values.password !== values.retype_password) {
+        if (isRegister && values.password !== values.retype_password) {
             // Set an error message
             newErrors.retype_password = 'The passwords did not match.';
             isValid = false;
         }
-        
+
         setErrors(newErrors);
         return isValid;
     }
@@ -58,89 +57,100 @@ export default function LoginRegister() {
         e.preventDefault();
         setAlert(null);
 
-        if(!isFormValid()) {
+        if (!isFormValid()) {
             return;
         }
 
-        if(!isRegister) {
+        if (!isRegister) {
             // Login
-            firebase.auth().signInWithEmailAndPassword(values.email, values.password)
-                .catch(function(error) {
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(values.email, values.password)
+                .catch(function (error) {
                     console.warn(error);
                 });
         } else {
             // Register
-            firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
-                .catch(function(error) {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(values.email, values.password)
+                .catch(function (error) {
                     console.warn(error);
-                    setAlert({type: 'danger', message: error.message});
+                    setAlert({ type: 'danger', message: error.message });
                 });
         }
     }
 
     return (
-        <form onSubmit={ handleSubmit }>
-            { alert?.message && (
-                <div className={ `alert alert-${alert.type}` } role="alert">
-                    { alert.message }
+        <form onSubmit={handleSubmit}>
+            {alert?.message && (
+                <div className={`alert alert-${alert.type}`} role="alert">
+                    {alert.message}
                 </div>
             )}
             <div className="form-row">
-                <h1>{  !isRegister ? 'Login' : 'Register' }</h1>
+                <h1>{!isRegister ? 'Login' : 'Register'}</h1>
             </div>
             <div className="form-row">
                 <div className="form-group col-md-4">
                     <label htmlFor="email">Email</label>
-                    <input 
-                        type="email" 
-                        className={ `form-control${errors.email && ' is-invalid'}` } 
-                        id="email" 
-                        name="email" 
-                        value={ values.email }
-                        onChange={ handleInputChange } />
-                    <div className="invalid-feedback">
-                        { errors.email }
-                    </div>
+                    <input
+                        type="email"
+                        className={`form-control${
+                            errors.email && ' is-invalid'
+                        }`}
+                        id="email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleInputChange}
+                    />
+                    <div className="invalid-feedback">{errors.email}</div>
                 </div>
             </div>
             <div className="form-row">
                 <div className="form-group col-md-4">
                     <label htmlFor="password">Password</label>
-                    <input 
-                        type="password" 
-                        className={ `form-control${errors.password && ' is-invalid'}` }  
-                        id="password" 
-                        name="password" 
-                        value={ values.password } 
-                        onChange={ handleInputChange } />
-                    <div className="invalid-feedback">
-                        { errors.password }
-                    </div>
+                    <input
+                        type="password"
+                        className={`form-control${
+                            errors.password && ' is-invalid'
+                        }`}
+                        id="password"
+                        name="password"
+                        value={values.password}
+                        onChange={handleInputChange}
+                    />
+                    <div className="invalid-feedback">{errors.password}</div>
                 </div>
             </div>
-            
-            { isRegister && (
+
+            {isRegister && (
                 <div className="form-row">
                     <div className="form-group col-md-4">
                         <label htmlFor="retype_password">Retype Password</label>
-                        <input 
-                            type="password" 
-                            className={ `form-control${errors.retype_password && ' is-invalid'}` }  
-                            id="retype_password" 
-                            name="retype_password" 
-                            value={ values.retype_password } 
-                            onChange={ handleInputChange } />
+                        <input
+                            type="password"
+                            className={`form-control${
+                                errors.retype_password && ' is-invalid'
+                            }`}
+                            id="retype_password"
+                            name="retype_password"
+                            value={values.retype_password}
+                            onChange={handleInputChange}
+                        />
                         <div className="invalid-feedback">
-                            { errors.retype_password }
+                            {errors.retype_password}
                         </div>
                     </div>
                 </div>
             )}
             <div className="form-row">
                 <div className="form-group col-md-4">
-                    <button className="btn btn-primary">{ !isRegister ? 'Login' : 'Register' }</button>
+                    <button className="btn btn-primary">
+                        {!isRegister ? 'Login' : 'Register'}
+                    </button>
                 </div>
             </div>
         </form>
-    )
+    );
 }

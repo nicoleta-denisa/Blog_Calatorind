@@ -100,36 +100,53 @@ export default function GetArticles() {
     return (
         <div className="container">
             <div className="row">
-                <form onSubmit={handleAddArticle}>
-                    <h5>Adaugare articol nou</h5>
+                <form onSubmit={handleAddArticle} className="form-getarticles ">
+                    <p className="form-title-getarticles">
+                        Adăugare articol nou
+                    </p>
                     <div className="form-group">
-                        <label htmlFor="image">Imagine</label>
+                        <label
+                            htmlFor="image"
+                            className="form-title-getarticles"
+                        >
+                            Imagine
+                        </label>
                         <input
                             type="file"
-                            className="form-control"
+                            className="form-control "
                             id="image"
                             onChange={(e) => setFile(e.target.files[0])}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="title">Titlu</label>
+                        <label
+                            htmlFor="title"
+                            className="form-title-getarticles"
+                        >
+                            Titlu
+                        </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="title"
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="text">Text</label>
+                        <label
+                            htmlFor="text"
+                            className="form-title-getarticles"
+                        >
+                            Text
+                        </label>
                         <textarea
+                            rows="4"
                             className="form-control"
                             id="text"
                             onChange={(e) => setText(e.target.value)}
                         ></textarea>
                     </div>
-                    <button type="submit" className="btn btn-primary">
-                        Adaugare
+                    <button type="submit" className="btn getarticles-btn">
+                        Adăugare
                     </button>
                 </form>
             </div>
@@ -162,7 +179,7 @@ export default function GetArticles() {
                                     className="btn btn-danger buttons font-text"
                                     onClick={() => deleteArticle(article)}
                                 >
-                                    Sterge
+                                    Șterge
                                 </button>
                                 <button
                                     className="btn btn-success buttons font-text"
@@ -175,7 +192,7 @@ export default function GetArticles() {
                                         })
                                     }
                                 >
-                                    Editeaza
+                                    Editează
                                 </button>
                             </div>
                         </div>

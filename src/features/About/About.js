@@ -15,56 +15,56 @@ export default function About() {
                         <br></br>
                         <br></br>
                         <Card.Text className="has-dropcap font-text">
-                            Dorinta de cunoastere a altor culturi, societati,
-                            meleaguri face parte din nazuinta fireasca a omului
-                            de a descoperi si explora necunoscutul. Daca din
-                            varii motive, nu toti reusim sa vizitam locurile la
-                            care visam, atunci macar putem sa citim despre ele
-                            pentru a le simti mult mai aproape de noi, iar „era”
-                            Internetului nu face decat sa ne ajute in acest
+                            Dorința de cunoaștere a altor culturi, societăți,
+                            meleaguri face parte din năzuința firească a omului
+                            de a descoperi și explora necunoscutul. Daca din
+                            varii motive, nu toți reușim să vizitam locurile la
+                            care visam, atunci măcar putem să citim despre ele
+                            pentru a le simți mult mai aproape de noi, iar „era”
+                            Internetului nu face decât să ne ajute în acest
                             sens.
                         </Card.Text>
 
                         <Card.Text className="font-text">
-                            De ce acest blog? Raspunsul este relativ simplu, iar
-                            punctul de plecare a fost faptul ca dupa cativa ani
-                            de calatorii, am ajuns la concluzia ca momentele in
-                            care am simtit ca traiesc cu adevarat au fost cele
-                            in care am explorat noi destinatii, am cunoscut noi
-                            culturi si am experimentat lucruri noi. In plus, de
-                            fiecare data cand rememorez calatoriile facute,
-                            citesc sau scriu ceva despre o destinatie turistica,
-                            simt cum inima incepe sa bata mai cu putere, iar
-                            pofta de viata atinge cotele cele mai inalte.
+                            De ce acest blog? Răspunsul este relativ simplu, iar
+                            punctul de plecare a fost faptul că după câțiva ani
+                            de călătorii, am ajuns la concluzia că momentele în
+                            care am simțit că trăiesc cu adevărat au fost cele
+                            în care am explorat noi destinații, am cunoscut noi
+                            culturi și am experimentat lucruri noi. În plus, de
+                            fiecare dată când rememorez călătoriile făcute,
+                            citesc sau scriu ceva despre o destinație turistică,
+                            simt cum inima începe să bată mai cu putere, iar
+                            pofta de viață atinge cotele cele mai înalte.
                         </Card.Text>
 
                         <Card.Img variant="top" src={About_me} />
 
                         <Card.Text className="font-text">
-                            Gandindu-ma ca mai sunt si altii care asemeni mie,
-                            gasesc o placere fie ea si de scurta durata in a
-                            citi / a visa la o destinatie turistica, am decis sa
-                            impartasesc si altora experientele mele turistice
-                            sau poate doar nazuinta spre noi destinatii pe care
-                            sper ca voi reusi sa le vizitez.
+                            Gandindu-mă că mai sunt și alții care asemeni mie,
+                            găsesc o plăcere fie ea și de scurtă durată în a
+                            citi / a visa la o destinație turistică, am decis să
+                            împărtășesc și altora experiențele mele turistice
+                            sau poate doar năzuință spre noi destinații pe care
+                            sper că voi reuși să le vizitez.
                         </Card.Text>
 
                         <Card.Text className="font-text">
-                            De asemenea, am speranta ca macar o parte dintre
-                            informatiile oferite sa fie, candva, de folos
+                            De asemenea, am speranța că măcar o parte dintre
+                            informațiile oferite să fie, cândva, de folos
                             cititorilor!
                         </Card.Text>
 
                         <Card.Text className="font-text">
-                            Asadar, dragi cititori ai acestui blog, lectura
-                            placuta si nu va opriti sa visati la locurile pe
-                            care doriti sa le vizitati!
+                            Așadar, dragi cititori ai acestui blog, lectura
+                            plăcută și nu vă opriți să visați la locurile pe
+                            care doriți să le vizitați!
                         </Card.Text>
 
                         <Card.Text className="font-text-italic">
-                            "Placerea resimtita din calatorii este probabil în
-                            functie de mentalitatea cu care calatorim decat
-                            destinatia spre care calatorim."
+                            "Plăcerea resimțită din călătorii este probabil în
+                            funcție de mentalitatea cu care călătorim decât
+                            destinația spre care călătorim."
                         </Card.Text>
                         <Card.Text className="font-text">
                             Alain de Botton

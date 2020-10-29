@@ -68,7 +68,7 @@ export default function LoginRegister() {
                     console.warn(error);
                     setAlert({
                         type: 'danger',
-                        message: 'Parola este incorecta!',
+                        message: 'Parola este incorectă!',
                     });
                 });
         } else {
@@ -97,7 +97,7 @@ export default function LoginRegister() {
                 )}
                 <div className="form-row justify-content-center">
                     <span className="login-form-title">
-                        {!isRegister ? 'Autentificare' : 'Inregistreaza-te'}
+                        {!isRegister ? 'Autentificare' : 'Înregistrează-te'}
                     </span>
                     <br></br>
                     <br></br>
@@ -163,7 +163,7 @@ export default function LoginRegister() {
                 <div className="form-row justify-content-center">
                     <div className="form-group col-md-7 container-login-form-btn">
                         <button className="btn login-form-btn">
-                            {!isRegister ? 'Autentificare' : 'Inregistreaza-te'}
+                            {!isRegister ? 'Autentificare' : 'Înregistrează-te'}
                         </button>
                     </div>
                 </div>

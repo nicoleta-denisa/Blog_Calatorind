@@ -31,7 +31,7 @@ export default function Newsletter() {
             />
             <div className="card-body">
                 <p className="card-text font-text">
-                    Obține cele mai sincere ganduri în materie de călătorii.
+                    Obține cele mai sincere gânduri în materie de călătorii.
                 </p>
                 <input
                     type="email"
@@ -45,7 +45,7 @@ export default function Newsletter() {
                     onClick={handleSubmit}
                     className="btn btn-block newsletter-btn"
                 >
-                    ABONEAZA-TE!
+                    ABONEAZĂ-TE!
                 </button>
             </div>
         </div>

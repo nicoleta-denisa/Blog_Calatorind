@@ -48,7 +48,7 @@ export default function Articles() {
                                         to={`/${article.id}`}
                                         className="btn  font-text"
                                     >
-                                        CITESTE MAI MULT <VscArrowRight />
+                                        CITEȘTE MAI MULT <VscArrowRight />
                                     </Link>
                                     <hr className="hr-dotted"></hr>
                                 </div>

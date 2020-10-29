@@ -12,7 +12,7 @@ import { Link, NavLink } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { AuthContext } from '../features/Auth/AuthContext';
-import Logo from '../images/logo2.png';
+import Logo from '../images/logo.png';
 
 export default function Navbarnav() {
     const { isAuthenticated, user } = useContext(AuthContext);
@@ -93,7 +93,7 @@ export default function Navbarnav() {
                                         onClick={handleLogout}
                                     >
                                         {' '}
-                                        Iesire
+                                        Ieșire
                                     </Navbar.Text>
                                 </Nav.Item>
                             </>
@@ -114,7 +114,7 @@ export default function Navbarnav() {
                                         exact
                                         to="/register"
                                     >
-                                        Inregistreaza-te
+                                        Înregistrează-te
                                     </NavLink>
                                 </Nav.Item>
                             </>

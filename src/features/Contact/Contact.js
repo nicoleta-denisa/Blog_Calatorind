@@ -19,12 +19,12 @@ export default function Contact() {
         let newErrors = { ...errors };
 
         if (!name) {
-            newErrors.name = 'Adauga un nume!';
+            newErrors.name = 'Adaugă un nume!';
             isValid = false;
         }
 
         if (!email) {
-            newErrors.email = 'Adauga un email!';
+            newErrors.email = 'Adaugă un email!';
             isValid = false;
         }
 

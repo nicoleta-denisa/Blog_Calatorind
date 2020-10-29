@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Home.css';
 import firebase from '../../components/firebase';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthContext } from '../Auth/AuthContext';
 
 const ref = firebase.firestore().collection('articles');
 
-export default function GetFirebase() {
+export default function GetArticles() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -14,23 +15,27 @@ export default function GetFirebase() {
     const [file, setFile] = useState(null);
     const [url, setURL] = useState('');
 
+    const { user } = useContext(AuthContext);
+
     const storage = firebase.storage();
 
     async function handleAddArticle(e) {
-        e.preventDefault();
-        const imageRef = storage.ref(`/images/${file.name}`);
-        await imageRef.put(file);
-        const url = await imageRef.getDownloadURL();
+        if (user) {
+            e.preventDefault();
+            const imageRef = storage.ref(`/images/${file.name}`);
+            await imageRef.put(file);
+            const url = await imageRef.getDownloadURL();
 
-        console.log(url);
-        setURL(url);
+            console.log(url);
+            setURL(url);
 
-        addArticle({
-            url,
-            title,
-            text,
-            id: uuidv4(),
-        });
+            addArticle({
+                url,
+                title,
+                text,
+                id: uuidv4(),
+            });
+        }
     }
 
     //GET FUNCTION
@@ -54,7 +59,7 @@ export default function GetFirebase() {
                 setArticles((prev) => [newArticle, ...prev]);
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -68,7 +73,7 @@ export default function GetFirebase() {
                 );
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }
 
@@ -88,105 +93,97 @@ export default function GetFirebase() {
                 );
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="row">
-                    <form onSubmit={handleAddArticle}>
-                        <h5>Adaugare articol nou</h5>
-                        <div className="form-group">
-                            <label htmlFor="image">Imagine</label>
-                            <input
-                                type="file"
-                                className="form-control"
-                                id="image"
-                                onChange={(e) => setFile(e.target.files[0])}
+        <div className="container">
+            <div className="row">
+                <form onSubmit={handleAddArticle}>
+                    <h5>Adaugare articol nou</h5>
+                    <div className="form-group">
+                        <label htmlFor="image">Imagine</label>
+                        <input
+                            type="file"
+                            className="form-control"
+                            id="image"
+                            onChange={(e) => setFile(e.target.files[0])}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="title">Titlu</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="title"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="text">Text</label>
+                        <textarea
+                            className="form-control"
+                            id="text"
+                            onChange={(e) => setText(e.target.value)}
+                        ></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Adaugare
+                    </button>
+                </form>
+            </div>
+            <hr />
+            {loading ? <h1>Loading...</h1> : null}
+            {articles.map((article) => (
+                <div className="row" key={article.id}>
+                    <div className="card article-frame">
+                        <div>
+                            <img
+                                src={article.url}
+                                alt=""
+                                className="cardImage card-img-top"
                             />
-                            {/* <button disabled={!file}>upload to firebase</button> */}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="title">Titlu</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="title"
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="text">Text</label>
-                            <textarea
-                                className="form-control"
-                                id="text"
-                                onChange={(e) => setText(e.target.value)}
-                            ></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">
-                            Adaugare
-                        </button>
-                    </form>
-                </div>
-                <hr />
-                {loading ? <h1>Loading...</h1> : null}
-                {articles.map((article) => (
-                    <div className="row" key={article.id}>
-                        <div className="col-lg-8 mb-8">
-                            <div className="card">
-                                <div>
-                                    <img
-                                        src={article.url}
-                                        alt=""
-                                        className="cardImage card-img-top"
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">
-                                            {' '}
-                                            {article.title}{' '}
-                                        </h5>
-                                        <p className="card-text">
-                                            {article.text?.substring(0, 200)}
-                                        </p>
-                                        <Link
-                                            to={`/home/${article.id}`}
-                                            className="btn btn-primary buttons"
-                                        >
-                                            Detalii
-                                        </Link>
-                                        {/* <button className="btn btn-primary buttons">Detalii</button> */}
-                                        <button
-                                            className="btn btn-danger buttons"
-                                            onClick={() =>
-                                                deleteArticle(article)
-                                            }
-                                        >
-                                            Sterge
-                                        </button>
-                                        <button
-                                            className="btn btn-success buttons"
-                                            onClick={() =>
-                                                editArticle({
-                                                    url,
-                                                    title,
-                                                    text,
-                                                    id: article.id,
-                                                })
-                                            }
-                                        >
-                                            Editeaza
-                                        </button>
-                                    </div>
-                                </div>
+                            <div className="card-body">
+                                <h5 className="card-title font-title">
+                                    {' '}
+                                    {article.title}{' '}
+                                </h5>
+                                <p className="card-text font-text">
+                                    {article.text?.substring(0, 200)}
+                                </p>
+                                <Link
+                                    to={`/${article.id}`}
+                                    className="btn btn-primary buttons font-text"
+                                >
+                                    Detalii
+                                </Link>
+                                <button
+                                    className="btn btn-danger buttons font-text"
+                                    onClick={() => deleteArticle(article)}
+                                >
+                                    Sterge
+                                </button>
+                                <button
+                                    className="btn btn-success buttons font-text"
+                                    onClick={() =>
+                                        editArticle({
+                                            url,
+                                            title,
+                                            text,
+                                            id: article.id,
+                                        })
+                                    }
+                                >
+                                    Editeaza
+                                </button>
                             </div>
-                            <br></br>
-                            <br></br>
                         </div>
                     </div>
-                ))}
-            </div>
-        </>
+                    <br></br>
+                    <br></br>
+                </div>
+            ))}
+        </div>
     );
 }

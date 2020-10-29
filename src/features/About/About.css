@@ -1,0 +1,36 @@
+.has-dropcap:first-letter {
+    float: left;
+    font-size: 6rem;
+    line-height: 0.65;
+    margin: 0.1em 0.1em 0.2em 0;
+}
+
+.card-details {
+    width: 50rem;
+    margin: none;
+    border: none;
+}
+
+.alignment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.font-title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+.font-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+.font-text-italic {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}

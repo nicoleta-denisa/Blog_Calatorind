@@ -7,11 +7,12 @@ import {
     FaPinterest,
 } from 'react-icons/fa';
 import './App.css';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { AuthContext } from '../features/Auth/AuthContext';
+import Logo from '../images/logo2.png';
 
 export default function Navbarnav() {
     const { isAuthenticated, user } = useContext(AuthContext);
@@ -28,15 +29,21 @@ export default function Navbarnav() {
     }
 
     return (
-        <div>
-            <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
-                <Link className="font navbar-brand" exact to="/home">
-                    Calatorind
+        <>
+            <Navbar
+                className="sticky-top"
+                collapseOnSelect
+                expand="lg"
+                bg="white"
+                variant="light"
+            >
+                <Link to="/">
+                    <img src={Logo} className="logo mx-auto d-block" alt="" />
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="font mr-auto">
-                        <NavLink className="nav-link" exact to="/home">
+                    <Nav className="font-navbar mr-auto">
+                        <NavLink className="nav-link" exact to="/">
                             Home
                         </NavLink>
                         <NavLink className="nav-link" exact to="/despre">
@@ -47,54 +54,67 @@ export default function Navbarnav() {
                         </NavLink>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="https://www.facebook.com/">
-                            <FaFacebookF />
-                        </Nav.Link>
-                        <Nav.Link href="https://www.instagram.com/?hl=ro">
-                            <FaInstagram />
-                        </Nav.Link>
-                        <Nav.Link href="https://www.facebook.com/s">
-                            <FaTwitter />
-                        </Nav.Link>
-                        <Nav.Link href="https://ro.pinterest.com/">
-                            <FaPinterest />
-                        </Nav.Link>
-
+                        <Row>
+                            <Col md="auto">
+                                <Nav.Link href="https://www.facebook.com/">
+                                    <FaFacebookF />
+                                </Nav.Link>
+                            </Col>
+                            <Col md="auto">
+                                <Nav.Link href="https://www.instagram.com/">
+                                    <FaInstagram />
+                                </Nav.Link>
+                            </Col>
+                            <Col md="auto">
+                                <Nav.Link href="https://twitter.com/">
+                                    <FaTwitter />
+                                </Nav.Link>
+                            </Col>
+                            <Col md="auto">
+                                <Nav.Link href="https://ro.pinterest.com/">
+                                    <FaPinterest />
+                                </Nav.Link>
+                            </Col>
+                            <Col xs={10} lg={5}></Col>
+                        </Row>
+                    </Nav>
+                    <Nav>
                         {isAuthenticated ? (
                             <>
-                                <Nav.Item>
+                                <Nav.Item className="font">
                                     <Navbar.Text>
-                                        Welcome {user.email}!
+                                        Bine ai venit {user.email}!
                                     </Navbar.Text>
                                 </Nav.Item>
-                                <Nav.Item>
+                                <br></br>
+                                <Nav.Item className="font">
                                     <Navbar.Text
                                         href="/"
                                         onClick={handleLogout}
                                     >
                                         {' '}
-                                        Logout
+                                        Iesire
                                     </Navbar.Text>
                                 </Nav.Item>
                             </>
                         ) : (
                             <>
-                                <Nav.Item>
+                                <Nav.Item className="font">
                                     <NavLink
                                         className="nav-link"
                                         exact
                                         to="/login"
                                     >
-                                        Login
+                                        Autentificare
                                     </NavLink>
                                 </Nav.Item>
-                                <Nav.Item>
+                                <Nav.Item className="font">
                                     <NavLink
                                         className="nav-link"
                                         exact
                                         to="/register"
                                     >
-                                        Register
+                                        Inregistreaza-te
                                     </NavLink>
                                 </Nav.Item>
                             </>
@@ -102,6 +122,6 @@ export default function Navbarnav() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </div>
+        </>
     );
 }

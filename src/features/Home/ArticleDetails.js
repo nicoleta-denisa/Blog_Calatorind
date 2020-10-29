@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import firebase from '../../components/firebase';
+import './Home.css';
 
 export default function ArticleDetails() {
     const [article, setArticles] = useState(null);
@@ -27,10 +28,17 @@ export default function ArticleDetails() {
         <div>
             {article.map((article) => (
                 <React.Fragment key={article.id}>
-                    <h1> {article.title}</h1>
-                    <div>{article.text}</div>
+                    <br></br>
+                    <p className="article-title "> {article.title}</p>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <div className="font-text">{article.text}</div>
                 </React.Fragment>
             ))}
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
 }

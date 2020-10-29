@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useLocation, Redirect } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import './LoginRegister.css';
+import { AuthContext } from './AuthContext';
 
 export default function LoginRegister() {
     const [values, setValues] = useState({
@@ -30,20 +32,17 @@ export default function LoginRegister() {
         const newErrors = { ...errors };
 
         if (!values.email) {
-            // Set an error message
-            newErrors.email = 'Please provide an email.';
+            newErrors.email = 'Adauga un email!';
             isValid = false;
         }
 
         if (!values.password) {
-            // Set an error message
-            newErrors.password = 'Please provide a password.';
+            newErrors.password = 'Adauga o parola!';
             isValid = false;
         }
 
         if (isRegister && values.password !== values.retype_password) {
-            // Set an error message
-            newErrors.retype_password = 'The passwords did not match.';
+            newErrors.retype_password = 'Parolele nu coincid!';
             isValid = false;
         }
 
@@ -62,15 +61,17 @@ export default function LoginRegister() {
         }
 
         if (!isRegister) {
-            // Login
             firebase
                 .auth()
                 .signInWithEmailAndPassword(values.email, values.password)
                 .catch(function (error) {
                     console.warn(error);
+                    setAlert({
+                        type: 'danger',
+                        message: 'Parola este incorecta!',
+                    });
                 });
         } else {
-            // Register
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(values.email, values.password)
@@ -81,76 +82,92 @@ export default function LoginRegister() {
         }
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            {alert?.message && (
-                <div className={`alert alert-${alert.type}`} role="alert">
-                    {alert.message}
-                </div>
-            )}
-            <div className="form-row">
-                <h1>{!isRegister ? 'Login' : 'Register'}</h1>
-            </div>
-            <div className="form-row">
-                <div className="form-group col-md-4">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        className={`form-control${
-                            errors.email && ' is-invalid'
-                        }`}
-                        id="email"
-                        name="email"
-                        value={values.email}
-                        onChange={handleInputChange}
-                    />
-                    <div className="invalid-feedback">{errors.email}</div>
-                </div>
-            </div>
-            <div className="form-row">
-                <div className="form-group col-md-4">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        className={`form-control${
-                            errors.password && ' is-invalid'
-                        }`}
-                        id="password"
-                        name="password"
-                        value={values.password}
-                        onChange={handleInputChange}
-                    />
-                    <div className="invalid-feedback">{errors.password}</div>
-                </div>
-            </div>
+    const { user } = useContext(AuthContext);
+    if (user) {
+        return <Redirect to="/"></Redirect>;
+    }
 
-            {isRegister && (
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label htmlFor="retype_password">Retype Password</label>
+    return (
+        <div className="login-form">
+            <form onSubmit={handleSubmit}>
+                {alert?.message && (
+                    <div className={`alert alert-${alert.type}`} role="alert">
+                        {alert.message}
+                    </div>
+                )}
+                <div className="form-row justify-content-center">
+                    <span className="login-form-title">
+                        {!isRegister ? 'Autentificare' : 'Inregistreaza-te'}
+                    </span>
+                    <br></br>
+                    <br></br>
+                </div>
+                <div className="form-row justify-content-center">
+                    <div className="form-group col-md-7 login-input">
+                        <input
+                            type="email"
+                            className={` form-control${
+                                errors.email && ' is-invalid'
+                            } login-text`}
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            value={values.email}
+                            onChange={handleInputChange}
+                        />
+                        <span className="focus-input"></span>
+                        <div className="invalid-feedback">{errors.email}</div>
+                    </div>
+                </div>
+                <div className="form-row justify-content-center">
+                    <div className="form-group col-md-7 login-input">
                         <input
                             type="password"
                             className={`form-control${
-                                errors.retype_password && ' is-invalid'
-                            }`}
-                            id="retype_password"
-                            name="retype_password"
-                            value={values.retype_password}
+                                errors.password && ' is-invalid'
+                            } login-text`}
+                            id="password"
+                            name="password"
+                            placeholder="Parola"
+                            value={values.password}
                             onChange={handleInputChange}
                         />
+                        <span className="focus-input"></span>
                         <div className="invalid-feedback">
-                            {errors.retype_password}
+                            {errors.password}
                         </div>
                     </div>
                 </div>
-            )}
-            <div className="form-row">
-                <div className="form-group col-md-4">
-                    <button className="btn btn-primary">
-                        {!isRegister ? 'Login' : 'Register'}
-                    </button>
+
+                {isRegister && (
+                    <div className="form-row justify-content-center">
+                        <div className="form-group col-md-7 login-input">
+                            <input
+                                type="password"
+                                className={`form-control${
+                                    errors.retype_password && ' is-invalid'
+                                } login-text`}
+                                id="retype_password"
+                                name="retype_password"
+                                placeholder="Rescrie Parola"
+                                value={values.retype_password}
+                                onChange={handleInputChange}
+                            />
+                            <span className="focus-input"></span>
+                            <div className="invalid-feedback">
+                                {errors.retype_password}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <div className="form-row justify-content-center">
+                    <div className="form-group col-md-7 container-login-form-btn">
+                        <button className="btn login-form-btn">
+                            {!isRegister ? 'Autentificare' : 'Inregistreaza-te'}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }

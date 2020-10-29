@@ -6,7 +6,7 @@ import {
     FaPinterestP,
 } from 'react-icons/fa';
 import './Home.css';
-import Articles from './Articles';
+import GetArticles from './GetArticles';
 import aboutImg from '../../images/about.jpg';
 import Newsletter from './Newsletter';
 
@@ -17,12 +17,13 @@ export default function Home() {
             <br></br>
             <div className="row">
                 <div className="col-lg-9 mb-9">
-                    <Articles />
+                    <GetArticles />
                 </div>
-
                 <div className="col-lg-3 mb-3">
                     <div className="card about">
-                        <h6>DESPRE MINE</h6>
+                        <h6>
+                            <b>DESPRE MINE</b>
+                        </h6>
 
                         <img
                             src={aboutImg}
